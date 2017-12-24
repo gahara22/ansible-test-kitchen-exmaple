@@ -2,7 +2,8 @@
 driver:
   # using docker to test
   name: docker
-  privileged: true
+  socket: unix:///var/run/docker.sock
+  use_sudo: false
 
 provisioner:
   # use an ansible playbook to provision our server
@@ -10,7 +11,7 @@ provisioner:
   # name of the host
   hosts: test-kitchen
   # list of ansible galaxy requirements from the roles meta/main.yml
-  requirements_path: dependencies.yml
+  #requirements_path: dependencies.yml
 
 platforms:
   - name: ubuntu-14.04
