@@ -7,5 +7,8 @@ describe 'ansible-$role::default' do
   # describe package('ruby2.2') do
   #   it { should be_installed.by('apt') }
   # end
+  describe file('/etc/hosts') do
+    it { should be_file }
+  end
 
 end

@@ -4,18 +4,27 @@ driver:
   name: docker
   socket: unix:///var/run/docker.sock
   use_sudo: false
+  #http_proxy: http://proxy.server:port
+  #https_proxy: http://proxy.server:port
 
 provisioner:
-  # use an ansible playbook to provision our server
-  name: ansible_playbook
-  # name of the host
-  hosts: test-kitchen
-  # list of ansible galaxy requirements from the roles meta/main.yml
-  #requirements_path: dependencies.yml
+  name: ansible_push
+  playbook: ./test/integration/default/default.yml
+  sudo: true
+  chef_bootstrap_url: false
+  #http_proxy: http://proxy.server:port
+  #https_proxy: http://proxy.server:port
 
 platforms:
   - name: ubuntu-14.04
+    driver_config:
+      provision_command:
+        - apt-get install python -y
 
 suites:
   # suites found at /test/integration/$test-name
   - name: default
+    run_list:
+    attributes:
+    inspec_tests:
+      - test/integration/default
