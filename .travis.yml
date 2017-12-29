@@ -5,7 +5,7 @@ services: docker
 
 install:
   - bundle install
-  - apt-get install ansible
+  - pip install --user ansible
 
 script:
   # run kitchen tests (destroy, create, converge, setup, verify and destroy)
